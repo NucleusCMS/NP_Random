@@ -28,7 +28,7 @@ class NP_Random extends NucleusPlugin {
    function getName()    { return 'Random'; }
    function getAuthor()  { return 'Mark Fulton (www.slashbomb.com)| Edmond Hui (admun)| Kai Greve (kgblog.de)'; }
    function getURL()     { return 'http://wakka.xiffy.nl/random'; }
-   function getVersion() { return '1.3'; }
+   function getVersion() { return '1.4'; }
    function getDescription() { return 'Displays a random text from a file by using &lt;%Random()%&gt; or &lt;%Random(random.txt)%&gt;.  Be sure to upload a text file called "random.txt" to your nucleus plugin directory in the subfolder random. Each line of the text file is considered as an entry.'; }
  
    function supportsFeature($what) {
@@ -67,7 +67,8 @@ class NP_Random extends NucleusPlugin {
       srand((double)microtime()*1000000);
  
       // read file
-      $lines = file("$filename");
+      $contents = file_get_contents($filename);
+      $lines = explode("\n", trim($contents));
       
       // option: ignore empty lines 
       if ($this->getOption('ignore')=='yes') {
@@ -84,4 +85,3 @@ class NP_Random extends NucleusPlugin {
       echo $lines[array_rand($lines)] ;
    }
 }
-?>
