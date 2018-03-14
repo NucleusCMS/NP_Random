@@ -61,7 +61,7 @@ class NP_Random extends NucleusPlugin {
       else
          $b =& $manager->getBlog($CONF['DefaultBlog']);
 
-      $filename = $CONF['PluginURL'].'random/'.$filename;
+      $filename = $this->getDirectory().$filename;
       
       // initialize random number generator
       srand((double)microtime()*1000000);
